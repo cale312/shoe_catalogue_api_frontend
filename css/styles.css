@@ -1,0 +1,12 @@
+body {
+  background: skyblue;
+}
+
+.t-header th {
+  padding: 5px 20px;
+  font-size:
+}
+
+.t-data td {
+  text-transform: capitalize;
+}
