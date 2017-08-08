@@ -4,9 +4,16 @@ body {
 
 .t-header th {
   padding: 5px 20px;
-  font-size:
+  font-size: 30px;
 }
 
 .t-data td {
   text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bolder;
+  background: ghostwhite;
+}
+
+.addBtn {
+  outline: none;
 }
