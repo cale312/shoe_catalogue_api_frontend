@@ -2,11 +2,13 @@
 
 $(function() {
 
+  const $warning = $('.warning');
+
   const $brand = $('.brand');
   const $color = $('.color');
   const $size = $('.size');
   const $price = $('.price');
-  const $nStock = $('.nStock');
+  const $stockN = $('.nStock');
 
   const $newBrand = $('.newBrand');
   const $newColor = $('.newColor');
@@ -26,7 +28,7 @@ $(function() {
         $color.append(shoe.color + '<br>');
         $size.append('US/' + shoe.size + '<br>');
         $price.append('R ' + shoe.price + '<br>');
-        $nStock.append(shoe.in_stock + '<br>');
+        $stockN.append(shoe.in_stock + '<br>');
       });
     },
     error: function() {
@@ -36,38 +38,42 @@ $(function() {
 
   $('.addBtn').on('click', function() {
 
-    let nStock = {
+    var nStock = {
       brand: $newBrand.val(),
       size: $newSize.val(),
       color: $newColor.val(),
       in_stock: $newStock.val(),
-      price: $newPrice.val(),
+      price: $newPrice.val()
     };
 
-    // console.log(nStock);
+    // var nStock = JSON.stringify(nStock);
+    // alert(nStock);
 
-    $.ajax({
-      type: 'POST',
-      url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes',
-      data: nStock,
-      success: function(newShoe) {
-        $brand.append(newShoe.brand + '<br>');
-        $color.append(newShoe.color + '<br>');
-        $size.append('US/' + newShoe.size + '<br>');
-        $price.append('R ' + newShoe.price + '<br>');
-        $nStock.append(newShoe.in_stock + '<br>');
-      },
-      error: function() {
-        alert('error saving new stock');
-      }
-    });
+    if ($newBrand.val() !== '' && $newSize.val() !== '' && $newColor.val() !== '' && $newStock.val() !== '' && $newPrice.val() !== '') {
+      $.ajax({
+        type: 'POST',
+        url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes',
+        data: JSON.stringify(nStock),
+        contentType: "application/json",
+      }).done(function(data) {
+        // alert(data);
+        $brand.append(data.brand + '<br>');
+        $color.append(data.color + '<br>');
+        $size.append('US/' + data.size + '<br>');
+        $price.append('R ' + data.price + '<br>');
+        $stockN.append(data.in_stock + '<br>');
+        location.reload();
+      });
+    } else {
+      $warning.append('<div class="alert alert-danger warning">Please enter valid stock values!</div>');
+    }
 
   });
 
 
   // $.ajax({
   //   type: 'GET',
-  //   url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/brand/:brand',
+  //   url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/brand/' + $brand,
   //   success: function(data) {
   //
   //   }
@@ -75,7 +81,7 @@ $(function() {
   //
   // $.ajax({
   //   type: 'GET',
-  //   url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/size/:size',
+  //   url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/size/' + $size,
   //   success: function(data) {
   //
   //   }

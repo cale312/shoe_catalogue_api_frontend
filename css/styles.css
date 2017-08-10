@@ -3,6 +3,7 @@ body {
 }
 
 .t-header th {
+  text-align: center;
   padding: 5px 20px;
   font-size: 30px;
 }
@@ -11,7 +12,6 @@ body {
   text-transform: capitalize;
   font-size: 20px;
   font-weight: bolder;
-  background: ghostwhite;
 }
 
 .addBtn {
