@@ -23,13 +23,7 @@ $(function() {
     url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes',
     success: function(data) {
       // stock = JSON.stringify(data);
-      $.each(data, function(i, shoe) {
-        $brand.append(shoe.brand + '<br>');
-        $color.append(shoe.color + '<br>');
-        $size.append('US/' + shoe.size + '<br>');
-        $price.append('R ' + shoe.price + '<br>');
-        $stockN.append(shoe.in_stock + '<br>');
-      });
+      console.log('data retrieved');
     },
     error: function() {
       alert('error loading the stock');
@@ -70,21 +64,38 @@ $(function() {
 
   });
 
+  $('.searchBtn').on('click', function() {
 
-  // $.ajax({
-  //   type: 'GET',
-  //   url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/brand/' + $brand,
-  //   success: function(data) {
-  //
-  //   }
-  // });
-  //
-  // $.ajax({
-  //   type: 'GET',
-  //   url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/size/' + $size,
-  //   success: function(data) {
-  //
-  //   }
-  // });
+    const $searchItem = $('.searchItem');
+    console.log($searchItem.val());
+
+    $.ajax({
+      type: 'GET',
+      url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/brand/' + $searchItem.val()
+    }).done(function(data) {
+      $.each(data, function(i, shoe) {
+        $('#brand').append(shoe.brand + '<br>');
+        $('#color').append(shoe.color + '<br>');
+        $('#size').append('US/' + shoe.size + '<br>');
+        $('#price').append('R ' + shoe.price + '<br>');
+        $('#stockN').append(shoe.in_stock + '<br>');
+      });
+    });
+
+    $.ajax({
+      type: 'GET',
+      url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/size/' + $searchItem.val(),
+      success: function(data) {
+        $.each(data, function(i, shoe) {
+          $('#brand').append(shoe.brand + '<br>');
+          $('#color').append(shoe.color + '<br>');
+          $('#size').append('US/' + shoe.size + '<br>');
+          $('#price').append('R ' + shoe.price + '<br>');
+          $('#stockN').append(shoe.in_stock + '<br>');
+        });
+      }
+    });
+
+  });
 
 });
