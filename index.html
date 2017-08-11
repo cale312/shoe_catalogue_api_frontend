@@ -17,11 +17,11 @@
   </div>
 </nav> -->
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default nav-bg">
   <h1>SHOE CATALOGUE</h1>
 </nav>
 
-<body>
+<body class="page-bg">
 
   <div class="container text-center">
     <div class="well row">
@@ -37,31 +37,32 @@
         <div class="warning"></div>
       </div>
       <div class="col-md-8">
-        <table align="center" class="table table-bordered">
-          <div class="text-center">
-            <input type="text" name="item" value="" class="searchItem text-center" placeholder="enter item">
-            <button type="button" name="button" class="fa fa-search btn btn-default"> search</button>
-            <hr>
-          </div>
-          <thead class="text-center t-header jumbotron">
-            <tr>
-              <th>Brand</th>
-              <th>Color</th>
-              <th>Size</th>
-              <th>Price</th>
-              <th>In Stock</th>
-            </tr>
-          </thead>
-          <tbody class="text-center t-data">
-            <tr>
-              <td class="brand"></td>
-              <td class="color"></td>
-              <td class="size"></td>
-              <td class="price"></td>
-              <td class="nStock"></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="well text-center">
+          <input type="text" name="item" value="" class="searchItem text-center" placeholder="enter item">
+          <button type="button" name="button" class="fa fa-search btn btn-default searchBtn"> search</button>
+          <br><br>
+          <table align="center" class="table table-bordered">
+            <thead class="t-head">
+              <tr>
+                <th>Brand</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>In Stock</th>
+              </tr>
+            </thead>
+            <tbody class="t-data">
+              <tr>
+                <td id="brand"></td>
+                <td id="color"></td>
+                <td id="size"></td>
+                <td id="price"></td>
+                <td id="stockN"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
       </div>
     </div>
     <hr>
