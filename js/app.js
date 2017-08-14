@@ -3,6 +3,7 @@
 $(function() {
 
   const $warning = $('.warning');
+  const $succes = $('.success');
 
   const $brand = $('.brand');
   const $color = $('.color');
@@ -51,15 +52,15 @@ $(function() {
         contentType: "application/json",
       }).done(function(data) {
         // alert(data);
-        $brand.append(data.brand + '<br>');
-        $color.append(data.color + '<br>');
-        $size.append('US/' + data.size + '<br>');
-        $price.append('R ' + data.price + '<br>');
-        $stockN.append(data.in_stock + '<br>');
-        location.reload();
+        document.querySelector('.newBrand').value = "";
+        document.querySelector('.newColor').value = "";
+        document.querySelector('.newSize').value = "";
+        document.querySelector('.newPrice').value = "";
+        document.querySelector('.newStock').value = "";
       });
+      document.querySelector('.condition').innerHTML = '<div class="alert alert-success success">New stock successfully added!</div>';
     } else {
-      $warning.append('<div class="alert alert-danger warning">Please enter valid stock values!</div>');
+      document.querySelector('.condition').innerHTML = '<div class="alert alert-danger warning">Please enter valid stock values!</div>';
     }
 
   });
@@ -68,6 +69,11 @@ $(function() {
 
     const $searchItem = $('.searchItem');
     console.log($searchItem.val());
+    document.querySelector('#brand').innerHTML = "";
+    document.querySelector('#color').innerHTML = "";
+    document.querySelector('#size').innerHTML = "";
+    document.querySelector('#price').innerHTML = "";
+    document.querySelector('#stockN').innerHTML = "";
 
     $.ajax({
       type: 'GET',
