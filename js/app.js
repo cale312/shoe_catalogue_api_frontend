@@ -17,13 +17,24 @@ $(function() {
   const $newPrice = $('.newPrice');
   const $newStock = $('.newStock');
 
-  // var stock = [];
+  function filterShoes(data){
+    if (data) {
+      $.each(data, function(i, shoe) {
+        $('#brand').append(shoe.brand + '<br>');
+        $('#color').append(shoe.color + '<br>');
+        $('#size').append('US/' + shoe.size + '<br>');
+        $('#price').append('R ' + shoe.price + '<br>');
+        $('#stockN').append(shoe.in_stock + '<br>');
+      });
+    }
+  }
 
   $.ajax({
     type: 'GET',
     url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes',
     success: function(data) {
       // stock = JSON.stringify(data);
+      filterShoes(data);
       console.log('data retrieved');
     },
     error: function() {
@@ -65,43 +76,37 @@ $(function() {
 
   });
 
+
   $('.searchBtn').on('click', function() {
 
-    const $searchItem = $('.searchItem');
-    console.log($searchItem.val());
-    document.querySelector('#brand').innerHTML = "";
-    document.querySelector('#color').innerHTML = "";
-    document.querySelector('#size').innerHTML = "";
-    document.querySelector('#price').innerHTML = "";
-    document.querySelector('#stockN').innerHTML = "";
+    const $searchItem = $('.searchItem').val().toLowerCase();
 
-    $.ajax({
-      type: 'GET',
-      url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/brand/' + $searchItem.val()
-    }).done(function(data) {
-      $.each(data, function(i, shoe) {
-        $('#brand').append(shoe.brand + '<br>');
-        $('#color').append(shoe.color + '<br>');
-        $('#size').append('US/' + shoe.size + '<br>');
-        $('#price').append('R ' + shoe.price + '<br>');
-        $('#stockN').append(shoe.in_stock + '<br>');
+    if ($searchItem !== "") {
+      document.querySelector('#brand').innerHTML = "";
+      document.querySelector('#color').innerHTML = "";
+      document.querySelector('#size').innerHTML = "";
+      document.querySelector('#price').innerHTML = "";
+      document.querySelector('#stockN').innerHTML = "";
+      $.ajax({
+        type: 'GET',
+        url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/brand/' + $searchItem
+      }).done(function(data) {
+        filterShoes(data)
       });
-    });
 
-    $.ajax({
-      type: 'GET',
-      url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/size/' + $searchItem.val(),
-      success: function(data) {
-        $.each(data, function(i, shoe) {
-          $('#brand').append(shoe.brand + '<br>');
-          $('#color').append(shoe.color + '<br>');
-          $('#size').append('US/' + shoe.size + '<br>');
-          $('#price').append('R ' + shoe.price + '<br>');
-          $('#stockN').append(shoe.in_stock + '<br>');
-        });
-      }
-    });
+      $.ajax({
+        type: 'GET',
+        url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes/size/' + $searchItem
+      }).done(function(data) {
+        filterShoes(data)
+      });
+    } else {
+      alert('warning');
+    }
 
   });
+
+  // function for searching a specific size and brand
+
 
 });
