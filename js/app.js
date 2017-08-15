@@ -57,8 +57,8 @@ $(function() {
         document.querySelector('.newSize').value = "";
         document.querySelector('.newPrice').value = "";
         document.querySelector('.newStock').value = "";
+        document.querySelector('.condition').innerHTML = '<div class="alert alert-success success">New stock successfully added!</div>';
       });
-      document.querySelector('.condition').innerHTML = '<div class="alert alert-success success">New stock successfully added!</div>';
     } else {
       document.querySelector('.condition').innerHTML = '<div class="alert alert-danger warning">Please enter valid stock values!</div>';
     }
