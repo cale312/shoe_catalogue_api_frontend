@@ -11,35 +11,49 @@
   <script src="js/handlebars-v4.0.5.js"></script>
 </head>
 
-<!-- <nav class="navbar navbar-default">
-  <div class="text-left">
-    <h1>SHOE CATALOGUE</h1>
-  </div>
-</nav> -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="index.html" class="navbar-brand">SHOE CATALOGUE</a>
+      <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-dropdown">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+    </div>
 
-<nav class="navbar navbar-default nav">
-  <h1>SHOE CATALOGUE</h1>
+    <div class="collapse navbar-collapse" id="nav-dropdown">
+      <ul class="nav navbar-nav">
+        <li><a href="find.html">View Stock</a></li>
+        <li class="active"><a href="index.html">Add Stock</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <body class="page-bg">
 
-  <div class="container text-center">
+  <div class="container-fluid text-center">
     <div class="well row">
       <div class="jumbotron form-group col-md-4" action="index.html" method="post">
         <label class="text-center"><h2>ADD STOCK</h2></label>
-        <input class="newBrand form-control" type="text" name="brand" placeholder="brand" required><br>
-        <input class="newSize form-control" type="text" name="size" placeholder="size" required><br>
-        <input class="newColor form-control" type="text" name="color" placeholder="color" required><br>
-        <input class="newPrice form-control" type="text" name="price" placeholder="price" required><br>
-        <input class="newStock form-control" type="text" name="stock" placeholder="stock" required><br>
+        <input class="newBrand form-control" type="text" name="brand" placeholder="brand"><br>
+        <input class="newSize form-control" type="text" name="size" placeholder="size"><br>
+        <input class="newColor form-control" type="text" name="color" placeholder="color"><br>
+        <input class="newPrice form-control" type="text" name="price" placeholder="price"><br>
+        <input class="newStock form-control" type="text" name="stock" placeholder="stock"><br>
         <button name="button" class="btn btn-lg btn-success fa fa-plus addBtn"><strong> ADD ITEM</strong></button>
         <br><br>
         <div class="condition"></div>
       </div>
       <div class="col-md-8">
         <div class="well text-center">
-          <input type="text" name="item" value="" class="searchItem text-center" placeholder="enter item brand or size">
-          <button type="button" name="button" class="fa fa-search btn btn-primary searchBtn"> search</button>
+          <!-- <input type="text" name="item" value="" class="searchItem text-center" placeholder="enter item brand or size">
+          <button type="button" name="button" class="fa fa-search btn btn-primary searchBtn"> search</button> -->
+          <div class="form-inline">
+            <input class="form-control searchItem" type="text" placeholder="Search">
+            <button class="btn btn-primary fa fa-search searchBtn" type="submit"> Search</button>
+          </div>
           <br><br>
           <table align="center" class="table table-bordered">
             <thead class="t-head jumbotron">
@@ -67,7 +81,6 @@
     </div>
     <hr>
   </div>
-
 
 </body>
 
