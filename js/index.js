@@ -17,6 +17,10 @@ $(function() {
   const $newPrice = $('.newPrice');
   const $newStock = $('.newStock');
 
+  $('.collapsed').on('click', function() {
+    $('.collapse').slideToggle();
+  });
+
   function filterShoes(data){
     if (data) {
       $.each(data, function(i, shoe) {
@@ -68,7 +72,7 @@ $(function() {
         document.querySelector('.newSize').value = "";
         document.querySelector('.newPrice').value = "";
         document.querySelector('.newStock').value = "";
-        document.querySelector('.condition').innerHTML = '<div class="alert alert-success success">New stock successfully added!</div>';
+        location.reload();
       });
     } else {
       document.querySelector('.condition').innerHTML = '<div class="alert alert-danger warning">Please enter valid stock values!</div>';
@@ -101,12 +105,32 @@ $(function() {
         filterShoes(data)
       });
     } else {
-      alert('warning');
+      alert('Shoe not available!');
     }
 
   });
 
-  // function for searching a specific size and brand
+  $('.seeAllBtn').on('click', function() {
 
+    document.querySelector('#brand').innerHTML = "";
+    document.querySelector('#color').innerHTML = "";
+    document.querySelector('#size').innerHTML = "";
+    document.querySelector('#price').innerHTML = "";
+    document.querySelector('#stockN').innerHTML = "";
+
+    $.ajax({
+      type: 'GET',
+      url: 'https://api-shoe-catalogue.herokuapp.com/api/shoes',
+      success: function(data) {
+        // stock = JSON.stringify(data);
+        filterShoes(data);
+        console.log('data retrieved');
+      },
+      error: function() {
+        alert('error loading the stock');
+      }
+    });
+
+  });
 
 });

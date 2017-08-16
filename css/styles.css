@@ -1,8 +1,3 @@
-.page-bg {
-  background: url(../img/bg.jpg) no-repeat;
-  background-size: cover;
-}
-
 .t-head th {
   text-align: center;
   padding: 5px 20px;
@@ -15,15 +10,29 @@
   font-weight: bolder;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.td {
+  text-transform: capitalize;
+  text-align: center;
+}
+
 .addBtn {
   outline: none;
 }
 
-.nav-bg {
-  background: rgba(255, 255, 255, 0.5);
+.brand, .size {
+  text-transform: capitalize;
 }
 
-.nav a {
-  color: #fff;
-  text-decoration: underline;
+.footer-links a{
+  font-size: 40px;
+  color: black;
+}
+
+.footer-links a:hover {
+  text-decoration: none;
+  color: grey;
 }

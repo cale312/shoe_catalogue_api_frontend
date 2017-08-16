@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Place your order</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+  <link rel="icon" href="img/iconjpeg">
+</head>
+
+<nav class="navbar navbar-default nav-bg">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="index.html" class="navbar-brand">SHOE CATALOGUE</a>
+      <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-dropdown">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="nav-dropdown">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Add Stock</a></li>
+        <li class="active"><a href="purchase.html">Order</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<body>
+  <div class="container row">
+
+    <div class="col-md-4">
+      <div class="form-group well">
+        <label>Brand</label>
+        <input type="text" class="form-control searchBrand" value="" placeholder="enter brand"><br>
+        <label>Size</label>
+        <input type="number" class="form-control searchSize" value="" placeholder="enter size"><br>
+        <button type="button" name="button" class="text-center btn btn-success fa fa-search find-btn"> Find</button>
+        <button type="button" name="button" class="text-center btn btn-primary fa fa-send order-btn"> Place order</button>
+        <hr><div class="status"></div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <table align="center" class="table table-bordered status">
+        <thead class="jumbotron">
+          <tr>
+            <th>Brand</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>In Stock</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr>
+            <td class="brand"></td>
+            <td class="color"></td>
+            <td class="size"></td>
+            <td class="price"></td>
+            <td class="stockN"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</body>
+
+<div class="container-fluid well">
+  <footer>
+    <div class="text-center footer-links">
+      <a href="https://github.com/cale312/shoe_catalogue_api_frontend/" class="fa fa-github" target="_blank"></a>
+      <br>site By: Zikisa Cale Sogaxa
+    </div>
+  </footer>
+</div>
+
+<script src="js/jquery/jquery.js"></script>
+<script src="js/purchase.js"></script>
+
+</html>

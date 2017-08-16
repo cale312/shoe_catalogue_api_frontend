@@ -8,10 +8,9 @@
   <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
   <link rel="icon" href="img/iconjpeg">
-  <script src="js/handlebars-v4.0.5.js"></script>
 </head>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default fixed">
   <div class="container">
     <div class="navbar-header">
       <a href="index.html" class="navbar-brand">SHOE CATALOGUE</a>
@@ -24,35 +23,34 @@
 
     <div class="collapse navbar-collapse" id="nav-dropdown">
       <ul class="nav navbar-nav">
-        <li><a href="find.html">View Stock</a></li>
         <li class="active"><a href="index.html">Add Stock</a></li>
+        <li><a href="purchase.html">Order</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<body class="page-bg">
+<body>
 
   <div class="container-fluid text-center">
-    <div class="well row">
-      <div class="jumbotron form-group col-md-4" action="index.html" method="post">
+    <div class="row">
+      <div class="well form-group col-md-4" action="index.html" method="post">
         <label class="text-center"><h2>ADD STOCK</h2></label>
-        <input class="newBrand form-control" type="text" name="brand" placeholder="brand"><br>
-        <input class="newSize form-control" type="text" name="size" placeholder="size"><br>
-        <input class="newColor form-control" type="text" name="color" placeholder="color"><br>
-        <input class="newPrice form-control" type="text" name="price" placeholder="price"><br>
-        <input class="newStock form-control" type="text" name="stock" placeholder="stock"><br>
+        <input class="newBrand form-control" type="text" name="brand" placeholder="enter brand"><br>
+        <input class="newSize form-control" type="text" name="size" placeholder="enter size"><br>
+        <input class="newColor form-control" type="text" name="color" placeholder="enter color"><br>
+        <input class="newPrice form-control" type="text" name="price" placeholder="enter price"><br>
+        <input class="newStock form-control" type="text" name="stock" placeholder="enter stock amount"><br>
         <button name="button" class="btn btn-lg btn-success fa fa-plus addBtn"><strong> ADD ITEM</strong></button>
-        <br><br>
+        <hr>
         <div class="condition"></div>
       </div>
       <div class="col-md-8">
         <div class="well text-center">
-          <!-- <input type="text" name="item" value="" class="searchItem text-center" placeholder="enter item brand or size">
-          <button type="button" name="button" class="fa fa-search btn btn-primary searchBtn"> search</button> -->
           <div class="form-inline">
             <input class="form-control searchItem" type="text" placeholder="Search">
-            <button class="btn btn-primary fa fa-search searchBtn" type="submit"> Search</button>
+            <button class="btn btn-primary fa fa-search searchBtn" type="submit"> filter</button>
+            <button class="btn btn-default fa fa-search seeAllBtn" type="submit"> see all</button>
           </div>
           <br><br>
           <table align="center" class="table table-bordered">
@@ -76,15 +74,22 @@
             </tbody>
           </table>
         </div>
-        <hr>
       </div>
     </div>
-    <hr>
   </div>
 
 </body>
 
+<div class="container-fluid well">
+  <footer>
+    <div class="text-center footer-links">
+      <a href="https://github.com/cale312/shoe_catalogue_api_frontend/" class="fa fa-github" target="_blank"></a>
+      <br>site By: Zikisa Cale Sogaxa
+    </div>
+  </footer>
+</div>
+
 <script src="js/jquery/jquery.js"></script>
-<script src="js/app.js"></script>
+<script src="js/index.js"></script>
 
 </html>
