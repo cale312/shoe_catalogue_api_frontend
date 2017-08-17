@@ -23,10 +23,6 @@
   outline: none;
 }
 
-.brand, .size {
-  text-transform: capitalize;
-}
-
 .footer-links a{
   font-size: 40px;
   color: black;

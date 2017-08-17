@@ -25,46 +25,51 @@
       <ul class="nav navbar-nav">
         <li><a href="index.html">Add Stock</a></li>
         <li class="active"><a href="purchase.html">Order</a></li>
+        <li><a href="admin.html">Admin</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <body>
-  <div class="container row">
+  <div class="container-fluid">
 
-    <div class="col-md-4">
-      <div class="form-group well">
-        <label>Brand</label>
-        <input type="text" class="form-control searchBrand" value="" placeholder="enter brand"><br>
-        <label>Size</label>
-        <input type="number" class="form-control searchSize" value="" placeholder="enter size"><br>
-        <button type="button" name="button" class="text-center btn btn-success fa fa-search find-btn"> Find</button>
-        <button type="button" name="button" class="text-center btn btn-primary fa fa-send order-btn"> Place order</button>
-        <hr><div class="status"></div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group well">
+          <label>Brand</label>
+          <input type="text" class="form-control searchBrand" value="" placeholder="enter brand"><br>
+          <label>Size</label>
+          <input type="number" class="form-control searchSize" value="" placeholder="enter size"><br>
+          <label>Amount</label>
+          <input type="number" class="form-control amount" value="" placeholder="enter amount"><br>
+          <button type="button" name="button" class="text-center btn btn-success fa fa-search find-btn"> Find</button>
+          <button type="button" name="button" class="text-center btn btn-primary fa fa-send order-btn"> Place order</button>
+          <hr><div class="status"></div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <table align="center" class="table table-bordered status">
-        <thead class="jumbotron">
-          <tr>
-            <th>Brand</th>
-            <th>Color</th>
-            <th>Size</th>
-            <th>Price</th>
-            <th>In Stock</th>
-          </tr>
-        </thead>
-        <tbody class="">
-          <tr>
-            <td class="brand"></td>
-            <td class="color"></td>
-            <td class="size"></td>
-            <td class="price"></td>
-            <td class="stockN"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col-md-8">
+        <table align="center" class="table table-bordered">
+          <thead class="jumbotron">
+            <tr>
+              <th>Brand</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>Price</th>
+              <th>In Stock</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr>
+              <td class="brand"></td>
+              <td class="color"></td>
+              <td class="size"></td>
+              <td class="price"></td>
+              <td class="stockN"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
