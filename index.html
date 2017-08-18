@@ -37,15 +37,19 @@
   <div class="container-fluid">
     <div class="row">
       <div class="well form-group col-md-4" action="index.html" method="post">
-        <label class="text-center"><h2>ADD STOCK</h2></label>
-        <input class="newBrand form-control" type="text" name="brand" placeholder="enter brand"><br>
-        <input class="newSize form-control" type="text" name="size" placeholder="enter size"><br>
-        <input class="newColor form-control" type="text" name="color" placeholder="enter color"><br>
-        <input class="newPrice form-control" type="text" name="price" placeholder="enter price"><br>
-        <input class="newStock form-control" type="text" name="stock" placeholder="enter stock amount"><br>
-        <button name="button" class="btn btn-lg btn-success fa fa-plus addBtn"><strong> ADD ITEM</strong></button>
+        <label>Brand *</label>
+        <input class="newBrand form-control" type="text" name="brand" placeholder="enter brand">
+        <label>Size *</label>
+        <input class="newSize form-control" type="number" name="size" placeholder="enter size">
+        <label>Color *</label>
+        <input class="newColor form-control" type="text" name="color" placeholder="enter color">
+        <label>Price *</label>
+        <input class="newPrice form-control" type="number" name="price" placeholder="enter price">
+        <label>Stock amount *</label>
+        <input class="newStock form-control" type="number" name="stock" placeholder="enter stock amount"><br>
+        <button name="button" class="btn btn-lg btn-success fa fa-plus add-btn"><strong> ADD ITEM</strong></button>
         <hr>
-        <div class="condition"></div>
+        <div class="status"></div>
       </div>
       <div class="col-md-8">
         <div class="well text-center">
@@ -54,26 +58,7 @@
             <button class="btn btn-primary fa fa-search filter-btn" type="submit"> filter</button>
           </div>
           <br><br>
-          <table align="center" class="table table-bordered myTable">
-            <thead class="jumbotron">
-              <tr>
-                <th>Brand</th>
-                <th>Color</th>
-                <th>Size</th>
-                <th>Price</th>
-                <th>In Stock</th>
-              </tr>
-            </thead>
-            <tbody class="">
-              <tr>
-                <td id="brand"></td>
-                <td id="color"></td>
-                <td id="size"></td>
-                <td id="price"></td>
-                <td id="stockN"></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-display"></div>
         </div>
       </div>
     </div>
@@ -81,7 +66,32 @@
 
 </body>
 
-<div class="container-fluid well">
+<script type="text/x-handlebars" class="table-template">
+  <table align="center" class="table table-bordered">
+    <thead class="jumbotron">
+      <tr>
+        <th>Brand</th>
+        <th>Color</th>
+        <th>Size</th>
+        <th>Price</th>
+        <th>In Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+      <tr class="tdata">
+        <td>{{this.brand}}</td>
+        <td>{{this.color}}</td>
+        <td>US/{{this.size}}</td>
+        <td>R {{this.price}}</td>
+        <td>{{this.in_stock}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<div class="container-fluid">
   <footer>
     <div class="text-center footer-links">
       <a href="https://github.com/cale312/shoe_catalogue_api_frontend/" class="fa fa-github" target="_blank"></a>
