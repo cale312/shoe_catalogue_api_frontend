@@ -9,21 +9,6 @@ $('.collapsed').on('click', function() {
 document.querySelector(".find-btn").disabled = true;
 document.querySelector(".order-btn").disabled = true;
 
-function sortData(data) {
-  document.querySelector('.brand').innerHTML = "";
-  document.querySelector('.size').innerHTML = "";
-  document.querySelector('.color').innerHTML = "";
-  document.querySelector('.price').innerHTML = "";
-  document.querySelector('.stockN').innerHTML = "";
-  $.each(data, function(i, shoe) {
-    $('.brand').append(shoe.brand + '<br>');
-    $('.color').append(shoe.color + '<br>');
-    $('.size').append('US/' + shoe.size + '<br>');
-    $('.price').append('R ' + shoe.price + '<br>');
-    $('.stockN').append(shoe.in_stock + '<br>');
-  });
-}
-
 $('.searchSize, .searchBrand').on('keyup', function() {
 
   if ($brand.val().length > 0 && $size.val().length > 0) {
@@ -31,12 +16,15 @@ $('.searchSize, .searchBrand').on('keyup', function() {
   } else {
     document.querySelector(".find-btn").disabled = true;
     document.querySelector(".order-btn").disabled = true;
+    document.querySelector('.status').innerHTML = "";
   }
 
 });
 
 // find the item by specific brand and size
 // and enable order button
+const table_template = document.querySelector('.table-template').innerHTML;
+const table_instance = Handlebars.compile(table_template);
 
 $('.find-btn').on('click', function() {
 
@@ -45,12 +33,14 @@ $('.find-btn').on('click', function() {
     url: 'http://localhost:4000/api/shoes/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val(),
     success: function(data) {
       if (data && data.length > 0) {
-        sortData(data);
+        document.querySelector('.table-display').innerHTML = table_instance({
+          data: data
+        });
         document.querySelector('.order-btn').disabled = false;
-        document.querySelector('.status').innerHTML = "";
       } else {
         document.querySelector('.order-btn').disabled = true;
         document.querySelector('.status').innerHTML = '<div class="alert dange alert-danger">Shoe not found!</div>';
+        document.querySelector('.table-display').innerHTML = "";
       }
     }
   });
