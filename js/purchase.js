@@ -6,6 +6,8 @@ $('.collapsed').on('click', function() {
   $('.collapse').slideToggle();
 });
 
+const api = 'https://api-shoe-catalogue.herokuapp.com/api/shoes';
+
 document.querySelector(".find-btn").disabled = true;
 document.querySelector(".order-btn").disabled = true;
 
@@ -30,7 +32,7 @@ $('.find-btn').on('click', function() {
 
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:4000/api/shoes/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val(),
+    url: api + '/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val(),
     success: function(data) {
       if (data && data.length > 0) {
         document.querySelector('.table-display').innerHTML = table_instance({
@@ -51,7 +53,7 @@ $('.order-btn').on('click', function() {
 
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:4000/api/shoes/sold/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val() + '/amount/' + $amount.val()
+    url: api + '/sold/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val() + '/amount/' + $amount.val()
   }).done(function(data) {
     if (data) {
       document.querySelector('.searchBrand').value = ""

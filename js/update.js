@@ -2,32 +2,39 @@ const $brand = $('.findBrand');
 const $size = $('.findSize');
 const $amount = $('.amount');
 
-function filterShoes(data) {
-  if (data) {
-    $.each(data, function(i, shoe) {
-      $('#brand').append(shoe.brand + '<br>');
-      $('#color').append(shoe.color + '<br>');
-      $('#size').append('US/' + shoe.size + '<br>');
-      $('#price').append('R ' + shoe.price + '<br>');
-      $('#stockN').append(shoe.in_stock + '<br>');
+const api = 'https://api-shoe-catalogue.herokuapp.com/api/shoes';
+
+document.querySelector('.update-btn').disabled = true;
+document.querySelector('.find-btn').disabled = true;
+
+const table_template = document.querySelector('.table-template').innerHTML;
+const table_instance = Handlebars.compile(table_template);
+
+$('.findBrand, .findSize').on('keyup', function() {
+  if ($brand.val().length > 0 && $size.val().length > 0) {
+    document.querySelector('.find-btn').disabled = false;
+  } else {
+    document.querySelector('.find-btn').disabled = true;
+    document.querySelector('.update-btn').disabled = true;
+    document.querySelector('.table-display').innerHTML = table_instance({
+      data: []
     });
   }
-}
+});
 
 $('.find-btn').on('click', function() {
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:4000/api/shoes/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val(),
-    success: function(data) {
-      if (data) {
-        filterShoes(data);
-      } else {
-        document.querySelector('.condition').innerHTML = '<div class="alert alert-danger warning">Item not found!</div>';
-      }
-    },
-    error: function(err) {
-      console.log(err);
-      document.querySelector('.condition').innerHTML = '<div class="alert alert-danger warning">Item not found!</div>';
+    url: api + '/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val()
+  }).done(function(data) {
+    if (data && data.length > 0) {
+      document.querySelector('.table-display').innerHTML = table_instance({
+        data: data
+      });
+      document.querySelector('.update-btn').disabled = false;
+      document.querySelector('.status').innerHTML = "";
+    } else {
+      document.querySelector('.status').innerHTML = '<div class="alert alert-danger warning">Item not found!</div>';
     }
   });
 });
@@ -36,12 +43,20 @@ $('.find-btn').on('click', function() {
 $('.update-btn').on('click', function() {
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:4000/api/shoes/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val() + '/amount/' + $amount.val(),
-    success: function(data) {
-      document.querySelector('.condition').innerHTML = '<div class="alert alert-success success">Stock updated!</div>';
-    },
-    error: function(err) {
-      alert(err);
-    }
+    url: api + '/update/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val() + '/amount/' + $amount.val()
+  }).done(function() {
+    $.ajax({
+      type: 'GET',
+      url: api + '/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val()
+    }).done(function(data) {
+      if (data && data.length > 0) {
+        document.querySelector('.table-display').innerHTML = table_instance({
+          data: data
+        });
+        document.querySelector('.update-btn').disabled = false;
+        document.querySelector('.status').innerHTML = "";
+      }
+    });
+    document.querySelector('.status').innerHTML = '<div class="alert alert-success success">Stock item successfully updated!</div>';
   });
 });

@@ -1,5 +1,7 @@
 'use strict'
 
+const api = 'https://api-shoe-catalogue.herokuapp.com/api/shoes';
+
 $('.collapsed').on('click', function() {
   $('.collapse').slideToggle();
 });
@@ -11,11 +13,12 @@ const $input = $('.input');
 
 $.ajax({
   type: 'GET',
-  url: 'http://localhost:4000/api/shoes',
+  url: api,
   success: function(data) {
     document.querySelector('.table-display').innerHTML = table_instance({
       data: data
     });
+    console.log('Stock loaded successfully!');
   },
   error: function() {
     alert('error loading the stock');
@@ -26,18 +29,22 @@ const table_display = document.querySelector('.table-display');
 
 const $searchInput = $('.input');
 var statusMsg = document.querySelector('.status');
+document.querySelector('.filter-btn').disabled = true;
 
 $('.input').on('keyup', function() {
   if ($searchInput.val().length == 0) {
+    document.querySelector('.filter-btn').disabled = true;
     $.ajax({
       type: 'GET',
-      url: 'http://localhost:4000/api/shoes',
+      url: api,
     }).done(function(data) {
       document.querySelector('.table-display').innerHTML = table_instance({
         data: data
       });
       statusMsg.innerHTML = "";
     });
+  } else {
+    document.querySelector('.filter-btn').disabled = false;
   }
 });
 
@@ -45,7 +52,7 @@ $('.filter-btn').on('click', function() {
 
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:4000/api/shoes/brand/' + $input.val().toLowerCase()
+    url: api + '/brand/' + $input.val().toLowerCase()
   }).done(function(data) {
     if (data && data.length > 0) {
       document.querySelector('.table-display').innerHTML = table_instance({
@@ -58,7 +65,7 @@ $('.filter-btn').on('click', function() {
 
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:4000/api/shoes/size/' + $input.val().toLowerCase()
+    url: api + '/size/' + $input.val()
   }).done(function(data) {
     if (data && data.length > 0) {
       document.querySelector('.table-display').innerHTML = table_instance({
@@ -94,18 +101,18 @@ $('.add-btn').on('click', function() {
     $.ajax({
       type: 'POST',
       data: JSON.stringify(newStock),
-      url: 'http://localhost:4000/api/shoes',
+      url: api,
       contentType: "application/json"
     }).done(function(data) {
       if (data) {
         document.querySelector('.table-display').innerHTML = table_instance({
           data: data
         });
-        document.querySelector('.newBrand') = "";
-        document.querySelector('.newSize') = "";
-        document.querySelector('.newColor') = "";
-        document.querySelector('.newPrice') = "";
-        document.querySelector('.newStock') = "";
+        document.querySelector('.newBrand').value = "";
+        document.querySelector('.newSize').value = "";
+        document.querySelector('.newColor').value = "";
+        document.querySelector('.newPrice').value = "";
+        document.querySelector('.newStock').value = "";
         statusMsg.innerHTML = '<div class="alert success alert-success">Stock added successfully!</div>';
       } else {
         statusMsg.innerHTML = '<div class="alert warning alert-danger">Error adding stock!</div>';
