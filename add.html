@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ADMIN</title>
+  <title>Add stock</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
@@ -24,9 +24,9 @@
 
     <div class="collapse navbar-collapse" id="nav-dropdown">
       <ul class="nav navbar-nav">
-        <li><a href="add.html">Add Stock</a></li>
+        <li class="active"><a href="index.html">Add Stock</a></li>
         <li><a href="purchase.html">Order</a></li>
-        <li class="active"><a href="admin.html">Admin</a></li>
+        <li><a href="admin.html">Admin</a></li>
       </ul>
     </div>
   </div>
@@ -36,20 +36,28 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="well form-group col-md-4" action="index.html" method="post">
+      <div class="well form-group col-md-4 add-field" action="index.html" method="post">
         <label>Brand</label>
-        <input class="findBrand form-control" type="text" name="brand" placeholder="enter brand"><br>
+        <input class="newBrand form-control" type="text" name="brand" placeholder="enter brand">
         <label>Size</label>
-        <input class="findSize form-control" type="number" name="size" placeholder="enter size"><br>
+        <input class="newSize form-control" type="number" name="size" placeholder="enter size">
+        <label>Color</label>
+        <input class="newColor form-control" type="text" name="color" placeholder="enter color">
+        <label>Price</label>
+        <input class="newPrice form-control" type="number" name="price" placeholder="enter price">
         <label>Stock amount</label>
-        <input class="amount form-control" type="number" name="stock" placeholder="enter stock amount"><br>
-        <button name="button" class="btn btn-lg btn-primary fa fa-search find-btn"><strong> find</strong></button>
-        <button name="button" class="btn btn-lg btn-success fa fa-plus update-btn"><strong> update</strong></button>
+        <input class="newStock form-control" type="number" name="stock" placeholder="enter stock amount"><br>
+        <button name="button" class="btn btn-lg btn-success fa fa-plus add-btn"><strong> ADD ITEM</strong></button>
         <hr>
         <div class="status"></div>
       </div>
-      <div class="col-md-8">
-        <div class="text-center">
+      <div class="col-md-8 stock-field">
+        <div class="well text-center">
+          <div class="form-inline">
+            <input class="form-control input" type="text" placeholder="Search">
+            <button class="btn btn-primary fa fa-search filter-btn" type="submit"> filter</button>
+          </div>
+          <br><br>
           <div class="table-display"></div>
         </div>
       </div>
@@ -94,6 +102,6 @@
 </div>
 
 <script src="js/jquery/jquery.js"></script>
-<script src="js/update.js"></script>
+<script src="js/index.js"></script>
 
 </html>
