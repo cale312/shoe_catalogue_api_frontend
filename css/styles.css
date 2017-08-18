@@ -14,7 +14,7 @@
   position: fixed;
 }
 
-.td {
+.table td {
   text-transform: capitalize;
   text-align: center;
 }
