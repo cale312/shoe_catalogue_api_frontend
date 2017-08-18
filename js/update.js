@@ -2,6 +2,10 @@ const $brand = $('.findBrand');
 const $size = $('.findSize');
 const $amount = $('.amount');
 
+$('.collapsed').on('click', function() {
+  $('.collapse').slideToggle();
+});
+
 const api = 'https://api-shoe-catalogue.herokuapp.com/api/shoes';
 
 document.querySelector('.update-btn').disabled = true;
