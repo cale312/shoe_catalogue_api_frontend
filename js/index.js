@@ -97,29 +97,26 @@ $('.add-btn').on('click', function() {
     in_stock: $('.newStock').val()
   }
 
-  if ($('.newBrand').val() !== "" && $('.newSize').val() !== "" && $('.newColor').val() !== "" && $('.newPrice').val() !== "" && $('.newStock').val() !== "") {
-    $.ajax({
-      type: 'POST',
-      data: JSON.stringify(newStock),
-      url: api,
-      contentType: "application/json"
-    }).done(function(data) {
-      if (data) {
-        document.querySelector('.table-display').innerHTML = table_instance({
-          data: data
-        });
-        document.querySelector('.newBrand').value = "";
-        document.querySelector('.newSize').value = "";
-        document.querySelector('.newColor').value = "";
-        document.querySelector('.newPrice').value = "";
-        document.querySelector('.newStock').value = "";
-        statusMsg.innerHTML = '<div class="alert success alert-success">Stock added successfully!</div>';
-      } else {
-        statusMsg.innerHTML = '<div class="alert warning alert-danger">Error adding stock!</div>';
-      }
-    });
-  } else {
-    alert('Please make sure all fields with asteriks(*) are filled');
-  }
+  $.ajax({
+    type: 'POST',
+    data: JSON.stringify(newStock),
+    url: api,
+    contentType: "application/json"
+  }).done(function(data) {
+    if (data) {
+      document.querySelector('.table-display').innerHTML = table_instance({
+        data: data
+      });
+      document.querySelector('.newBrand').value = "";
+      document.querySelector('.newSize').value = "";
+      document.querySelector('.newColor').value = "";
+      document.querySelector('.newPrice').value = "";
+      document.querySelector('.newStock').value = "";
+      statusMsg.innerHTML = '<div class="alert success alert-success">Stock added successfully!</div>';
+    } else {
+      statusMsg.innerHTML = '<div class="alert warning alert-danger">Error adding stock!</div>';
+    }
+  });
+
 
 });
