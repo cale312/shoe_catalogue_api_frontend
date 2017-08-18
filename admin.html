@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+  <script src="js/handlebars-v4.0.5.js"></script>
   <link rel="icon" href="img/iconjpeg">
 </head>
 
@@ -33,47 +34,54 @@
 
 <body>
 
-  <div class="container-fluid text-center">
+  <div class="container-fluid">
     <div class="row">
       <div class="well form-group col-md-4" action="index.html" method="post">
-        <label class="text-center"><h2>UPDATE STOCK</h2></label>
+        <label>Brand</label>
         <input class="findBrand form-control" type="text" name="brand" placeholder="enter brand"><br>
+        <label>Size</label>
         <input class="findSize form-control" type="number" name="size" placeholder="enter size"><br>
-        <input class="stockN form-control" type="number" name="stock" placeholder="enter stock amount"><br>
-        <button name="button" class="btn btn-lg btn-success fa fa-plus find-btn"><strong> find</strong></button>
+        <label>Stock amount</label>
+        <input class="amount form-control" type="number" name="stock" placeholder="enter stock amount"><br>
+        <button name="button" class="btn btn-lg btn-primary fa fa-search find-btn"><strong> find</strong></button>
         <button name="button" class="btn btn-lg btn-success fa fa-plus update-btn"><strong> update</strong></button>
         <hr>
-        <div class="condition"></div>
+        <div class="status"></div>
       </div>
       <div class="col-md-8">
         <div class="well text-center">
-          <br><br>
-          <table align="center" class="table table-bordered">
-            <thead class="t-head jumbotron">
-              <tr>
-                <th>Brand</th>
-                <th>Color</th>
-                <th>Size</th>
-                <th>Price</th>
-                <th>In Stock</th>
-              </tr>
-            </thead>
-            <tbody class="t-data">
-              <tr>
-                <td id="brand"></td>
-                <td id="color"></td>
-                <td id="size"></td>
-                <td id="price"></td>
-                <td id="stockN"></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-display"></div>
         </div>
       </div>
     </div>
   </div>
 
 </body>
+
+<script type="text/x-handlebars" class="table-template">
+  <table align="center" class="table table-bordered">
+    <thead class="jumbotron">
+      <tr>
+        <th>Brand</th>
+        <th>Color</th>
+        <th>Size</th>
+        <th>Price</th>
+        <th>In Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+      <tr class="tdata">
+        <td>{{this.brand}}</td>
+        <td>{{this.color}}</td>
+        <td>US/{{this.size}}</td>
+        <td>R {{this.price}}</td>
+        <td>{{this.in_stock}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
 
 <div class="container-fluid well">
   <footer>
