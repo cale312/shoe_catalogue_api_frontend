@@ -23,10 +23,40 @@ $('.searchSize, .searchBrand').on('keyup', function() {
 
 });
 
-// find the item by specific brand and size
-// and enable order button
 const table_template = document.querySelector('.table-template').innerHTML;
 const table_instance = Handlebars.compile(table_template);
+const table_display = document.querySelector('.table-display');
+
+$.ajax({
+  type: 'GET',
+  url: api,
+  success: function(data) {
+    table_display.innerHTML = table_instance({
+      data: data
+    });
+    console.log('Stock loaded successfully!');
+  },
+  error: function() {
+    alert('error loading the stock!');
+  }
+});
+
+$('.searchBrand').on('keyup', function() {
+  var input, filter, table, tr, td, i;
+  input = $('.searchBrand').val().toLowerCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.indexOf(input) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+});
 
 $('.find-btn').on('click', function() {
 
@@ -56,6 +86,14 @@ $('.order-btn').on('click', function() {
     url: api + '/sold/brand/' + $brand.val().toLowerCase() + '/size/' + $size.val() + '/amount/' + $amount.val()
   }).done(function(data) {
     if (data) {
+      $.ajax({
+        type: 'GET',
+        url: api,
+      }).done(function(data) {
+        table_display.innerHTML = table_instance({
+          data: data
+        });
+      });
       document.querySelector('.searchBrand').value = ""
       document.querySelector('.searchSize').value = ""
       document.querySelector('.amount').value = ""

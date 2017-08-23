@@ -8,76 +8,7 @@ $('.collapsed').on('click', function() {
 
 const table_template = document.querySelector('.table-template').innerHTML;
 const table_instance = Handlebars.compile(table_template);
-
-const $input = $('.input');
-
-$.ajax({
-  type: 'GET',
-  url: api,
-  success: function(data) {
-    document.querySelector('.table-display').innerHTML = table_instance({
-      data: data
-    });
-    console.log('Stock loaded successfully!');
-  },
-  error: function() {
-    alert('error loading the stock');
-  }
-});
-
 const table_display = document.querySelector('.table-display');
-
-const $searchInput = $('.input');
-var statusMsg = document.querySelector('.status');
-document.querySelector('.filter-btn').disabled = true;
-
-$('.input').on('keyup', function() {
-  if ($searchInput.val().length == 0) {
-    document.querySelector('.filter-btn').disabled = true;
-    $.ajax({
-      type: 'GET',
-      url: api,
-    }).done(function(data) {
-      document.querySelector('.table-display').innerHTML = table_instance({
-        data: data
-      });
-      statusMsg.innerHTML = "";
-    });
-  } else {
-    document.querySelector('.filter-btn').disabled = false;
-  }
-});
-
-$('.filter-btn').on('click', function() {
-
-  $.ajax({
-    type: 'GET',
-    url: api + '/brand/' + $input.val().toLowerCase()
-  }).done(function(data) {
-    if (data && data.length > 0) {
-      document.querySelector('.table-display').innerHTML = table_instance({
-        data: data
-      });
-    } else {
-      statusMsg.innerHTML = '<div class="alert warning alert-danger">Shoe not found!</div>';
-    }
-  });
-
-  $.ajax({
-    type: 'GET',
-    url: api + '/size/' + $input.val()
-  }).done(function(data) {
-    if (data && data.length > 0) {
-      document.querySelector('.table-display').innerHTML = table_instance({
-        data: data
-      });
-    } else {
-      statusMsg.innerHTML = '<div class="alert warning alert-danger">Shoe not found!</div>';
-    }
-  });
-
-});
-
 document.querySelector('.add-btn').disabled = true;
 
 $('.newBrand, .newStock, .newSize, .newPrice, .newColor').on('keyup', function() {
@@ -85,6 +16,39 @@ $('.newBrand, .newStock, .newSize, .newPrice, .newColor').on('keyup', function()
     document.querySelector('.add-btn').disabled = false;
   } else {
     document.querySelector('.add-btn').disabled = true;
+  }
+});
+
+$.ajax({
+  type: 'GET',
+  url: api,
+  success: function(data) {
+    table_display.innerHTML = table_instance({
+      data: data
+    });
+    console.log('Stock loaded successfully!');
+  },
+  error: function() {
+    alert('error loading the stock!');
+  }
+});
+
+var statusMsg = document.querySelector('.status');
+
+$('.input').on('keyup', function() {
+  var input, filter, table, tr, td, i;
+  input = $('.input').val().toLowerCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.indexOf(input) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
   }
 });
 
@@ -112,11 +76,11 @@ $('.add-btn').on('click', function() {
       document.querySelector('.newColor').value = "";
       document.querySelector('.newPrice').value = "";
       document.querySelector('.newStock').value = "";
+      document.querySelector('.add-btn').disabled = true;
       statusMsg.innerHTML = '<div class="alert success alert-success">Stock added successfully!</div>';
     } else {
       statusMsg.innerHTML = '<div class="alert warning alert-danger">Error adding stock!</div>';
     }
   });
-
 
 });

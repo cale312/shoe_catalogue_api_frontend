@@ -57,7 +57,7 @@
 </body>
 
 <script type="text/x-handlebars" class="table-template">
-  <table align="center" class="table table-bordered">
+  <table align="center" class="table table-bordered" id="myTable">
     <thead class="jumbotron">
       <tr>
         <th>Brand</th>
@@ -72,7 +72,7 @@
       <tr>
         <td>{{this.brand}}</td>
         <td>{{this.color}}</td>
-        <td>US/{{this.size}}</td>
+        <td>{{this.size}}</td>
         <td>R {{this.price}}</td>
         <td>{{this.in_stock}}</td>
       </tr>
